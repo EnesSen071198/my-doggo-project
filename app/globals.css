@@ -9,8 +9,8 @@
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+    --background: #ffffff;
+    --foreground: #000000;
   }
 }
 
@@ -18,4 +18,132 @@ body {
   color: var(--foreground);
   background: var(--background);
   font-family: Arial, Helvetica, sans-serif;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 1rem;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  min-height: 100vh;
+}
+
+.navbar {
+  position: fixed;
+  top: 50%;
+  left: 0;
+  transform: translateY(-50%);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  padding: 7rem;
+  margin: auto 5rem;
+  font-size: 20px;
+  background-color: var(--background);
+}
+
+.ul-list {
+  list-style: none;
+  padding: 0;
+}
+
+.li-list {
+  padding: 1.5rem 0;
+}
+
+.link {
+  display: flex;
+  align-items: center;
+}
+
+.icon {
+  margin-right: 8px;
+}
+
+hr {
+  margin: 1rem 0;
+  border: 0;
+  border-top: 1px solid #ddd;
+}
+
+input[type="text"] {
+  width: 80%;
+  margin: 0.3rem 6rem;
+  padding: 1.5rem;
+  border: 1px solid #ebe2e2;
+  background-color: lightgray;
+  border-radius: 10rem;
+}
+
+.post {
+  border: 1px solid #ddd;
+  padding: 1rem;
+  margin-bottom: 1rem;
+  border-radius: 5px;
+}
+
+.post-header {
+  display: flex;
+  align-items: center;
+  margin-bottom: 0.5rem;
+}
+
+.profile-image {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  margin-right: 1rem;
+}
+
+.post-header-text {
+  display: flex;
+  flex-direction: column;
+}
+.post-actions {
+  display: flex;
+  justify-content: space-around;
+  margin-top: 1rem;
+}
+
+.action-icon {
+  font-size: 1.5rem;
+  cursor: pointer;
+  color: #333;
+}
+
+.action-icon:hover {
+  color: #007bff;
+}
+
+.post-image {
+  width: 100%; /* Ensures the image takes up the full width of its container */
+  height: 600px; /* Fixes the height of the image to 600 pixels */
+  margin: 0.5rem 0; /* Adds a margin of 0.5 rem above and below the image */
+  border-radius: 5px; /* Rounds the corners of the image with a 5-pixel radius */
+  background-position: center; /* Centers the background image */
+  background-size: cover; /* Scales the background image to cover the container while maintaining its aspect ratio */
+}
+
+.post-footer {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 0.5rem;
+}
+
+.post-tags {
+  margin-top: 0.5rem;
+  color: #0a0a0a;
+}
+
+.tag {
+  display: inline-block;
+  background-color: #f0f0f0;
+  border-radius: 3px;
+  padding: 0.2rem 0.5rem;
+  margin-right: 0.5rem;
+  margin-top: 0.5rem;
+  font-size: 0.8rem;
 }

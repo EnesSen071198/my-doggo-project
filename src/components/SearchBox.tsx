@@ -1,6 +1,9 @@
 "use client";
 
 import { useState } from "react";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faSearch } from "@fortawesome/free-solid-svg-icons";
+import "../../app/globals.css"; // Eğer CSS dosyanız varsa
 
 const SearchBox = ({ onSearch }: { onSearch: (value: string) => void }) => {
   const [searchTerm, setSearchTerm] = useState("");
@@ -12,14 +15,16 @@ const SearchBox = ({ onSearch }: { onSearch: (value: string) => void }) => {
   };
 
   return (
-    <input
-      type='text'
-      value={searchTerm}
-      onChange={handleSearch}
-      placeholder='Ara...'
-      className='border p-2 w-full'
-      style={{ color: "black" }}
-    />
+    <div className='search-container'>
+      <input
+        type='text'
+        value={searchTerm}
+        onChange={handleSearch}
+        placeholder='Search Posts'
+        className='search-input'
+      />
+      <FontAwesomeIcon icon={faSearch} className='search-icon' />
+    </div>
   );
 };
 

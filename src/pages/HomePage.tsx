@@ -1,7 +1,4 @@
 "use client";
-// src/fontawesome.d.ts
-declare module "@fortawesome/free-solid-svg-icons";
-
 import Link from "next/link";
 import { useState, useEffect } from "react";
 import SearchBox from "../components/SearchBox";
@@ -13,7 +10,15 @@ import {
   faRetweet,
   faHeart,
   faUpload,
+  faImage,
+  faSmile,
+  faPoll,
+  faCalendarAlt,
+  faGrin,
+  faLaughBeam
 } from "@fortawesome/free-solid-svg-icons";
+import Image from "next/image"; // Importing Image component from next/image
+import icon from "../assets/icon.png"; // Correctly importing the image
 
 interface Post {
   id: string;
@@ -35,28 +40,29 @@ const fallbackImages = ["https://via.placeholder.com/150"];
 const profileImages = ["https://via.placeholder.com/50"]; // Example profile image
 
 const unsplash = createApi({
-  accessKey: "uO1U414qXKPrM8i3sGQDrrBHyDxaJH_NUd4xZmwRVjw",
+  accessKey: "Uceg_z6sKBkjlDWWbdICHOby3X78E8zlvsWjN7zFA4g"
 });
 
 const HomePage = () => {
   const [searchResults, setSearchResults] = useState<string[]>([]);
   const [posts, setPosts] = useState<Post[]>((postsData as Data).posts);
   const [images, setImages] = useState<string[]>([]);
-
-  const handleSearch = (value: string) => {
-    const data = (postsData as Data).posts.map((post: Post) => post.content);
-    const results = data.filter((item: string) =>
-      item.toLowerCase().includes(value.toLowerCase())
-    );
-    setSearchResults(results);
-  };
+  const [isClient, setIsClient] = useState(false);
 
   useEffect(() => {
+    setIsClient(true);
+
     const fetchImages = async () => {
       try {
         const response = await unsplash.photos.getRandom({
-          count: posts.length,
+          count: posts.length
         });
+
+        if (response.errors) {
+          console.error("Error fetching images from Unsplash", response.errors);
+          return;
+        }
+
         if (response.response) {
           const urls = Array.isArray(response.response)
             ? response.response.map(
@@ -73,24 +79,98 @@ const HomePage = () => {
     fetchImages();
   }, [posts.length]);
 
+  const handleSearch = (value: string) => {
+    const data = (postsData as Data).posts.map((post: Post) => post.content);
+    const results = data.filter((item: string) =>
+      item.toLowerCase().includes(value.toLowerCase())
+    );
+    setSearchResults(results);
+  };
+
+  if (!isClient) {
+    return null;
+  }
+
   return (
-    <div style={{ padding: "50px 100px" }}>
-      <h1>Home</h1>
+    <div style={{ padding: "15px 120px" }} key={isClient ? "client" : "server"}>
+      <div
+        style={{
+          display: "flex",
+          justifyContent: "space-between",
+          alignItems: "center"
+        }}>
+        <h1>Home</h1>
+        <Image src={icon} alt='Icon' width={50} height={50} />
+      </div>
       <hr />
       <SearchBox onSearch={handleSearch} />
+
+      <div style={{ display: "flex", marginTop: "1rem" }}>
+        <img
+          src={images[0] || profileImages[0]}
+          alt='Profile'
+          style={{
+            borderRadius: "100%",
+            marginRight: "-4rem",
+            marginTop: "1rem"
+          }}
+          className='profile-image'
+        />
+        <div style={{ flex: 1, borderRight: "1px solid #ddd" }}>
+          <input
+            type='text'
+            placeholder="  What's happening?"
+            className='post-input'
+            style={{
+              width: "70%",
+              padding: "1rem",
+              marginBottom: "1rem",
+              backgroundColor: "white",
+              fontSize: "1.5rem",
+              borderRight: " 1px solid #ddd"
+            }}
+          />
+          <div className='actions'>
+            <div
+              style={{
+                display: "flex",
+                alignItems: "center",
+                marginLeft: "7rem"
+              }}>
+              <FontAwesomeIcon icon={faImage} className='action-icon' />
+              <FontAwesomeIcon icon={faGrin} className='action-icon' />
+              <FontAwesomeIcon icon={faPoll} className='action-icon' />
+              <FontAwesomeIcon icon={faLaughBeam} className='action-icon' />
+              <FontAwesomeIcon icon={faCalendarAlt} className='action-icon' />
+            </div>
+            <button
+              style={{
+                backgroundColor: "#ff8700",
+                color: "white",
+                padding: "0.5rem 1rem",
+                borderRadius: "10rem",
+                border: "none",
+                cursor: "pointer",
+                marginRight: "2rem"
+              }}>
+              Post
+            </button>
+          </div>
+        </div>
+      </div>
 
       <div>
         {posts.map((post: Post, index: number) => (
           <div key={post.id} className='post'>
             <div className='post-header'>
               <img
-                src={images[index]}
+                src={images[index] || profileImages[0]}
                 alt={`${post.username} Profile`}
                 className='profile-image'
               />
               <div className='post-header-text'>
                 <h3>{post.username}</h3>
-                <span>{new Date(post.timestamp).toLocaleString()}</span>
+                <span className='username-info'>@{post.username} .5m</span>
               </div>
             </div>
             <p>{post.content}</p>
@@ -109,17 +189,7 @@ const HomePage = () => {
                 }}
               />
             ) : null}
-            <div className='post-footer'>
-              <span>{post.likes} Likes</span>
-              <span>{post.reposts} Reposts</span>
-            </div>
-            <div className='post-tags'>
-              {post.tags.map((tag, index) => (
-                <span key={index} className='tag'>
-                  {tag}
-                </span>
-              ))}
-            </div>
+
             <div className='post-actions'>
               <FontAwesomeIcon icon={faComment} className='action-icon' />
               <FontAwesomeIcon icon={faRetweet} className='action-icon' />

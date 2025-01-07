@@ -1,13 +1,19 @@
 import Link from "next/link";
 import { FaHome, FaHashtag, FaBookmark, FaUser } from "react-icons/fa";
 import "./globals.css"; // Eğer CSS dosyanız varsa
+import postsData from "../src/data/post_dataset.json";
 
 export const metadata = {
   title: "My Next.js App",
-  description: "A sample Next.js app with categorized pages.",
+  description: "A sample Next.js app with categorized pages."
 };
 
 const Layout = ({ children }: { children: React.ReactNode }) => {
+  const userProfile = {
+    username: "YourUsername", // Replace this with the actual username from your data
+    profileImage: "https://via.placeholder.com/50" // Replace this with the actual image URL from your data
+  };
+
   return (
     <html lang='en'>
       <head>
@@ -50,6 +56,39 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
                 </Link>
               </li>
             </ul>
+            <button
+              style={{
+                backgroundColor: "#e56d18",
+                color: "white",
+                padding: "0.5rem 4rem",
+                borderRadius: "10rem",
+                border: "none",
+                cursor: "pointer",
+                marginTop: "6rem"
+              }}>
+              New Post
+            </button>
+
+            <Link href='/ProfilePage' legacyBehavior>
+              <button
+                style={{
+                  display: "flex",
+                  alignItems: "center",
+                  backgroundColor: "#f0f0f0",
+                  padding: "0.5rem 1rem",
+                  borderRadius: "10rem",
+                  border: "none",
+                  cursor: "pointer",
+                  marginTop: "3rem"
+                }}>
+                <img
+                  src={userProfile.profileImage}
+                  alt='Profile'
+                  style={{ borderRadius: "50%", marginRight: "0.5rem" }}
+                />
+                {userProfile.username}
+              </button>
+            </Link>
           </nav>
           <main style={{ flex: 1, padding: "20px" }}>{children}</main>
         </div>

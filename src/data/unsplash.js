@@ -1,7 +1,7 @@
 import { createApi } from "unsplash-js";
 
 const unsplash = createApi({
-  accessKey: "uO1U414qXKPrM8i3sGQDrrBHyDxaJH_NUd4xZmwRVjw",
+  accessKey: "Uceg_z6sKBkjlDWWbdICHOby3X78E8zlvsWjN7zFA4g"
 });
 
 export default unsplash;

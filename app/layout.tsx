@@ -1,5 +1,7 @@
 import Link from "next/link";
 import { FaHome, FaHashtag, FaBookmark, FaUser } from "react-icons/fa";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faEllipsisH } from "@fortawesome/free-solid-svg-icons"; // Adding the icon for three dots
 import "./globals.css"; // Eğer CSS dosyanız varsa
 import postsData from "../src/data/post_dataset.json";
 
@@ -74,12 +76,13 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
                 style={{
                   display: "flex",
                   alignItems: "center",
-                  backgroundColor: "#f0f0f0",
                   padding: "0.5rem 1rem",
                   borderRadius: "10rem",
                   border: "none",
                   cursor: "pointer",
-                  marginTop: "3rem"
+                  marginTop: "3rem",
+                  position: "relative",
+                  backgroundColor: "transparent" // Background color removed
                 }}>
                 <img
                   src={userProfile.profileImage}
@@ -87,6 +90,16 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
                   style={{ borderRadius: "50%", marginRight: "0.5rem" }}
                 />
                 {userProfile.username}
+                <FontAwesomeIcon
+                  icon={faEllipsisH}
+                  className='three-dots-icon'
+                  style={{
+                    position: "absolute",
+                    top: "0",
+                    right: "0",
+                    color: "#ddd"
+                  }}
+                />
               </button>
             </Link>
           </nav>

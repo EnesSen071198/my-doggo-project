@@ -1,17 +1,41 @@
 "use client";
-
 import { useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSearch } from "@fortawesome/free-solid-svg-icons";
 import "../../app/globals.css"; // Eğer CSS dosyanız varsa
 
-const SearchBox = ({ onSearch }: { onSearch: (value: string) => void }) => {
+// Define the Post type
+type Post = {
+  id: string;
+  username: string;
+  content: string;
+  timestamp: string;
+  likes: number;
+  reposts: number;
+  tags: string[];
+  images: string[];
+  comments: any[];
+};
+
+const SearchBox = ({
+  posts,
+  onFilteredPosts
+}: {
+  posts: Post[];
+  onFilteredPosts: (filteredPosts: Post[]) => void;
+}) => {
   const [searchTerm, setSearchTerm] = useState("");
 
   const handleSearch = (event: React.ChangeEvent<HTMLInputElement>) => {
     const value = event.target.value;
     setSearchTerm(value);
-    onSearch(value);
+
+    // Filter posts based on search term
+    const filteredPosts = posts.filter((post) =>
+      post.content.toLowerCase().includes(value.toLowerCase())
+    );
+
+    onFilteredPosts(filteredPosts);
   };
 
   return (

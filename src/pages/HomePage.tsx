@@ -1,8 +1,8 @@
 "use client";
-import Link from "next/link";
+
 import { useState, useEffect } from "react";
-import SearchBox from "../components/SearchBox";
-import postsData from "../data/post_dataset.json";
+import Link from "next/link";
+import Image from "next/image";
 import { createApi } from "unsplash-js";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
@@ -11,14 +11,15 @@ import {
   faHeart,
   faUpload,
   faImage,
-  faSmile,
+  faGrin,
   faPoll,
   faCalendarAlt,
-  faGrin,
-  faLaughBeam
+  faLaughBeam,
+  faEllipsisH
 } from "@fortawesome/free-solid-svg-icons";
-import Image from "next/image"; // Importing Image component from next/image
-import icon from "../assets/icon.png"; // Correctly importing the image
+import SearchBox from "../components/SearchBox";
+import postsData from "../data/post_dataset.json";
+import icon from "../assets/icon.png";
 
 interface Post {
   id: string;
@@ -40,12 +41,12 @@ const fallbackImages = ["https://via.placeholder.com/150"];
 const profileImages = ["https://via.placeholder.com/50"]; // Example profile image
 
 const unsplash = createApi({
-  accessKey: "Uceg_z6sKBkjlDWWbdICHOby3X78E8zlvsWjN7zFA4g"
+  accessKey: "EjbDtCDS0TUBnWllhd57GdVR7gI5wIQbGaGbRDhVSsc"
 });
 
 const HomePage = () => {
-  const [searchResults, setSearchResults] = useState<string[]>([]);
   const [posts, setPosts] = useState<Post[]>((postsData as Data).posts);
+  const [filteredPosts, setFilteredPosts] = useState<Post[]>(posts);
   const [images, setImages] = useState<string[]>([]);
   const [isClient, setIsClient] = useState(false);
 
@@ -79,14 +80,6 @@ const HomePage = () => {
     fetchImages();
   }, [posts.length]);
 
-  const handleSearch = (value: string) => {
-    const data = (postsData as Data).posts.map((post: Post) => post.content);
-    const results = data.filter((item: string) =>
-      item.toLowerCase().includes(value.toLowerCase())
-    );
-    setSearchResults(results);
-  };
-
   if (!isClient) {
     return null;
   }
@@ -103,7 +96,7 @@ const HomePage = () => {
         <Image src={icon} alt='Icon' width={50} height={50} />
       </div>
       <hr />
-      <SearchBox onSearch={handleSearch} />
+      <SearchBox posts={posts} onFilteredPosts={setFilteredPosts} />
 
       <div style={{ display: "flex", marginTop: "1rem" }}>
         <img
@@ -160,15 +153,24 @@ const HomePage = () => {
       </div>
 
       <div>
-        {posts.map((post: Post, index: number) => (
-          <div key={post.id} className='post'>
-            <div className='post-header'>
+        {filteredPosts.map((post: Post, index: number) => (
+          <div key={post.id} className='post' style={{ position: "relative" }}>
+            <div className='post-header' style={{ position: "relative" }}>
               <img
                 src={images[index] || profileImages[0]}
                 alt={`${post.username} Profile`}
                 className='profile-image'
               />
               <div className='post-header-text'>
+                <FontAwesomeIcon
+                  icon={faEllipsisH}
+                  className='three-dots-icon'
+                  style={{
+                    position: "absolute",
+                    top: "0",
+                    right: "0"
+                  }}
+                />
                 <h3>{post.username}</h3>
                 <span className='username-info'>@{post.username} .5m</span>
               </div>

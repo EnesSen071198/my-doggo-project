@@ -3,7 +3,7 @@ import { useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSearch } from "@fortawesome/free-solid-svg-icons";
 import "../../app/globals.css"; // Eğer CSS dosyanız varsa
-
+import "../styles/SearchBox.css";
 // Define the Post type
 type Post = {
   id: string;

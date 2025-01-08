@@ -1,10 +1,10 @@
-"use client";
+"use client"; // Bu satır, Next.js 13'te sayfa bileşeninin sadece istemci tarafında çalışması gerektiğini belirtir.
 
-import { useState, useEffect } from "react";
-import Link from "next/link";
-import Image from "next/image";
-import { createApi } from "unsplash-js";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { useState, useEffect } from "react"; // React'ten 'useState' ve 'useEffect' hook'larını içeri aktarır
+import Link from "next/link"; // Next.js link bileşeni
+import Image from "next/image"; // Next.js image bileşeni
+import { createApi } from "unsplash-js"; // Unsplash API ile fotoğraf almak için kullanılır
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"; // FontAwesome ikonlarını kullanmak için
 import {
   faComment,
   faRetweet,
@@ -16,11 +16,14 @@ import {
   faCalendarAlt,
   faLaughBeam,
   faEllipsisH
-} from "@fortawesome/free-solid-svg-icons";
-import SearchBox from "../components/SearchBox";
-import postsData from "../data/post_dataset.json";
-import icon from "../assets/icon.png";
-
+} from "@fortawesome/free-solid-svg-icons"; // Çeşitli FontAwesome ikonlarını içe aktarır
+import SearchBox from "../components/SearchBox"; // Arama kutusu bileşenini içe aktarır
+import postsData from "../data/post_dataset.json"; // JSON dosyasından post verilerini alır
+import icon from "../assets/icon.png"; // Uygulama ikonu
+import "../../app/globals.css"; // Global CSS dosyasını içe aktarır
+import "../styles/HomePage.css";
+import Layout from "@/app/layout";
+// Post verisinin yapısını tanımlar
 interface Post {
   id: string;
   username: string;
@@ -33,30 +36,37 @@ interface Post {
   comments: any[];
 }
 
+// Veritabanındaki postları tutan bir veri yapısı tanımlar
 interface Data {
   posts: Post[];
 }
 
+// Düşük çözünürlüklü bir placeholder resmini belirler
 const fallbackImages = ["https://via.placeholder.com/150"];
-const profileImages = ["https://via.placeholder.com/50"]; // Example profile image
+// Profil resimleri için placeholder
+const profileImages = ["https://via.placeholder.com/50"];
 
+// Unsplash API'yi başlatır
 const unsplash = createApi({
   accessKey: "EjbDtCDS0TUBnWllhd57GdVR7gI5wIQbGaGbRDhVSsc"
 });
 
 const ExplorePage = () => {
+  // Postları ve filtrelenmiş postları tutan durum değişkenlerini oluşturur
   const [posts, setPosts] = useState<Post[]>((postsData as Data).posts);
   const [filteredPosts, setFilteredPosts] = useState<Post[]>(posts);
-  const [images, setImages] = useState<string[]>([]);
-  const [isClient, setIsClient] = useState(false);
+  const [images, setImages] = useState<string[]>([]); // Postlar için resimleri tutan durum değişkeni
+  const [isClient, setIsClient] = useState(false); // İstemci tarafı olup olmadığını kontrol etmek için
 
+  // 'useEffect' hook'u ile sayfa yüklenirken resimler alınır
   useEffect(() => {
-    setIsClient(true);
+    setIsClient(true); // İlk render'da istemci tarafında çalıştığını belirtir
 
     const fetchImages = async () => {
       try {
+        // Unsplash API'den rastgele fotoğraflar alınır
         const response = await unsplash.photos.getRandom({
-          count: posts.length
+          count: posts.length // Alınacak fotoğraf sayısı, post sayısına eşit
         });
 
         if (response.errors) {
@@ -64,144 +74,114 @@ const ExplorePage = () => {
           return;
         }
 
+        // Fotoğraf URL'lerini alır ve durum değişkenine ekler
         if (response.response) {
           const urls = Array.isArray(response.response)
             ? response.response.map(
                 (photo: { urls: { small: string } }) => photo.urls.small
               )
             : [response.response.urls.small];
-          setImages(urls);
+          setImages(urls); // Resimleri 'images' durum değişkenine atar
         }
       } catch (error) {
-        console.error("Failed to fetch images from Unsplash", error);
+        console.error("Failed to fetch images from Unsplash", error); // Hata yönetimi
       }
     };
 
-    fetchImages();
-  }, [posts.length]);
+    fetchImages(); // 'fetchImages' fonksiyonu çağrılır
+  }, [posts.length]); // Post sayısı değiştiğinde yeniden çalışır
 
   if (!isClient) {
-    return null;
+    return null; // Sayfa istemci tarafında render edilene kadar hiçbir şey döndürülmez
   }
 
   return (
-    <div style={{ padding: "15px 120px" }} key={isClient ? "client" : "server"}>
-      <div
-        style={{
-          display: "flex",
-          justifyContent: "space-between",
-          alignItems: "center"
-        }}>
-        <h1>Explore </h1>
-        <Image src={icon} alt='Icon' width={50} height={50} />
-      </div>
-      <hr />
-      <SearchBox posts={posts} onFilteredPosts={setFilteredPosts} />
-
-      <div style={{ display: "flex", marginTop: "1rem" }}>
-        <img
-          src={images[0] || profileImages[0]}
-          alt='Profile'
-          style={{
-            borderRadius: "100%",
-            marginRight: "-4rem",
-            marginTop: "1rem"
-          }}
-          className='profile-image'
-        />
-        <div style={{ flex: 1, borderRight: "1px solid #ddd" }}>
-          <input
-            type='text'
-            placeholder="  What's happening?"
-            className='post-input'
-            style={{
-              width: "70%",
-              padding: "1rem",
-              marginBottom: "1rem",
-              backgroundColor: "white",
-              fontSize: "1.5rem",
-              borderRight: " 1px solid #ddd"
-            }}
+    <Layout>
+      <div className='homepage-container'>
+        <div className='homepage-header'>
+          <h1>ExplorePage</h1> {/* Sayfa başlığı */}
+          <Image src={icon} alt='Icon' width={50} height={50} />{" "}
+          {/* Uygulama ikonu */}
+        </div>
+        <hr /> {/* Yatay çizgi */}
+        <SearchBox posts={posts} onFilteredPosts={setFilteredPosts} />{" "}
+        {/* Arama kutusu bileşeni */}
+        <div className='post-input-container'>
+          <img
+            src={images[0] || profileImages[0]} // İlk resim varsa kullan, yoksa profil resmi kullan
+            alt='Profile'
+            className='profile-image'
           />
-          <div className='actions'>
-            <div
-              style={{
-                display: "flex",
-                alignItems: "center",
-                marginLeft: "7rem"
-              }}>
-              <FontAwesomeIcon icon={faImage} className='action-icon' />
-              <FontAwesomeIcon icon={faGrin} className='action-icon' />
-              <FontAwesomeIcon icon={faPoll} className='action-icon' />
-              <FontAwesomeIcon icon={faLaughBeam} className='action-icon' />
-              <FontAwesomeIcon icon={faCalendarAlt} className='action-icon' />
+          <div className='post-input-wrapper'>
+            <input
+              type='text'
+              placeholder="  What's happening?" // Post yazma alanı
+              className='post-input'
+            />
+            <div className='actions'>
+              <div className='action-icons'>
+                {/* Aşağıdaki ikonlar post içerisine eklenebilecek aksiyonları temsil eder */}
+                <FontAwesomeIcon icon={faImage} className='action-icon' />
+                <FontAwesomeIcon icon={faGrin} className='action-icon' />
+                <FontAwesomeIcon icon={faPoll} className='action-icon' />
+                <FontAwesomeIcon icon={faLaughBeam} className='action-icon' />
+                <FontAwesomeIcon icon={faCalendarAlt} className='action-icon' />
+              </div>
+              <button className='post-button'>Post</button>{" "}
+              {/* Paylaş butonu */}
             </div>
-            <button
-              style={{
-                backgroundColor: "#ff8700",
-                color: "white",
-                padding: "0.5rem 1rem",
-                borderRadius: "10rem",
-                border: "none",
-                cursor: "pointer",
-                marginRight: "2rem"
-              }}>
-              Post
-            </button>
           </div>
         </div>
-      </div>
-
-      <div>
-        {filteredPosts.map((post: Post, index: number) => (
-          <div key={post.id} className='post' style={{ position: "relative" }}>
-            <div className='post-header' style={{ position: "relative" }}>
-              <img
-                src={images[index] || profileImages[0]}
-                alt={`${post.username} Profile`}
-                className='profile-image'
-              />
-              <div className='post-header-text'>
-                <FontAwesomeIcon
-                  icon={faEllipsisH}
-                  className='three-dots-icon'
-                  style={{
-                    position: "absolute",
-                    top: "0",
-                    right: "0"
+        {/* Filtrelenmiş postlar render ediliyor */}
+        <div>
+          {filteredPosts.map((post: Post, index: number) => (
+            <div key={post.id} className='post'>
+              <div className='post-header'>
+                <img
+                  src={images[index] || profileImages[0]} // Her post için resim
+                  alt={`${post.username} Profile`}
+                  className='profile-image'
+                />
+                <div className='post-header-text'>
+                  <FontAwesomeIcon
+                    icon={faEllipsisH}
+                    className='three-dots-icon'
+                  />{" "}
+                  {/* Üç nokta ikonu */}
+                  <h3>{post.username}</h3> {/* Kullanıcı adı */}
+                  <span className='username-info'>
+                    @{post.username} .5m
+                  </span>{" "}
+                  {/* Kullanıcı ismi ve zaman bilgisi */}
+                </div>
+              </div>
+              <p>{post.content}</p> {/* Post içeriği */}
+              {images[index] ? (
+                <img
+                  src={images[index]}
+                  alt='Post Image'
+                  className='post-image'
+                  onError={(e) => {
+                    const target = e.target as HTMLImageElement;
+                    const fallbackIndex =
+                      index < fallbackImages.length ? index : 0;
+                    target.onerror = null; // Sonsuz döngüyü engeller
+                    target.src = fallbackImages[fallbackIndex]; // Fallback resmini kullanır
                   }}
                 />
-                <h3>{post.username}</h3>
-                <span className='username-info'>@{post.username} .5m</span>
+              ) : null}
+              {/* Postun aksiyon ikonları */}
+              <div className='post-actions'>
+                <FontAwesomeIcon icon={faComment} className='action-icon' />
+                <FontAwesomeIcon icon={faRetweet} className='action-icon' />
+                <FontAwesomeIcon icon={faHeart} className='action-icon' />
+                <FontAwesomeIcon icon={faUpload} className='action-icon' />
               </div>
             </div>
-            <p>{post.content}</p>
-            {images[index] ? (
-              <img
-                src={images[index]}
-                alt='Post Image'
-                className='post-image'
-                onError={(e) => {
-                  const target = e.target as HTMLImageElement;
-                  const fallbackIndex =
-                    index < fallbackImages.length ? index : 0;
-                  console.error("Image failed to load: ", target.src);
-                  target.onerror = null; // Prevents infinite loop if fallback image fails
-                  target.src = fallbackImages[fallbackIndex]; // Use fallback image URL
-                }}
-              />
-            ) : null}
-
-            <div className='post-actions'>
-              <FontAwesomeIcon icon={faComment} className='action-icon' />
-              <FontAwesomeIcon icon={faRetweet} className='action-icon' />
-              <FontAwesomeIcon icon={faHeart} className='action-icon' />
-              <FontAwesomeIcon icon={faUpload} className='action-icon' />
-            </div>
-          </div>
-        ))}
+          ))}
+        </div>
       </div>
-    </div>
+    </Layout>
   );
 };
 

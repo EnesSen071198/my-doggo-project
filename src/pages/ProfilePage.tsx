@@ -1,25 +1,19 @@
-"use client";
-import Link from "next/link";
-import { useState, useEffect } from "react";
-import SearchBox from "../components/SearchBox";
-import postsData from "../data/post_dataset.json";
-import { createApi } from "unsplash-js";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+"use client"; // Bu satır, Next.js 13'te sayfa bileşeninin sadece istemci tarafında çalışması gerektiğini belirtir.
+
+import { useState, useEffect } from "react"; // React'ten 'useState' ve 'useEffect' hook'larını içeri aktarır
+import { createApi } from "unsplash-js"; // Unsplash API ile fotoğraf almak için kullanılır
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"; // FontAwesome ikonlarını kullanmak için
 import {
   faComment,
   faRetweet,
   faHeart,
   faUpload,
-  faImage,
-  faSmile,
-  faPoll,
-  faCalendarAlt,
-  faGrin,
-  faLaughBeam
-} from "@fortawesome/free-solid-svg-icons";
-import Image from "next/image"; // Importing Image component from next/image
-import icon from "../assets/icon.png"; // Correctly importing the image
-
+  faEllipsisH
+} from "@fortawesome/free-solid-svg-icons"; // Çeşitli FontAwesome ikonlarını içe aktarır
+import postsData from "../data/post_dataset.json"; // JSON dosyasından post verilerini alır
+import "../styles/ProfilePage.css"; // Profil sayfası için stil
+import Layout from "../../app/layout";
+// Post verisinin yapısını tanımlar
 interface Post {
   id: string;
   username: string;
@@ -36,26 +30,24 @@ interface Data {
   posts: Post[];
 }
 
-const fallbackImages = ["https://via.placeholder.com/150"];
-const profileImages = ["https://via.placeholder.com/50"]; // Example profile image
-
+// Unsplash API'yi başlatır
 const unsplash = createApi({
-  accessKey: "Uceg_z6sKBkjlDWWbdICHOby3X78E8zlvsWjN7zFA4g"
+  accessKey: "EjbDtCDS0TUBnWllhd57GdVR7gI5wIQbGaGbRDhVSsc"
 });
 
 const ProfilePage = () => {
-  const [searchResults, setSearchResults] = useState<string[]>([]);
   const [posts, setPosts] = useState<Post[]>((postsData as Data).posts);
-  const [images, setImages] = useState<string[]>([]);
-  const [isClient, setIsClient] = useState(false);
+  const [filteredPosts, setFilteredPosts] = useState<Post[]>(posts);
+  const [images, setImages] = useState<string[]>([]); // Postlar için resimleri tutan durum değişkeni
+  const [isClient, setIsClient] = useState(false); // İstemci tarafı olup olmadığını kontrol etmek için
 
   useEffect(() => {
-    setIsClient(true);
+    setIsClient(true); // İlk render'da istemci tarafında çalıştığını belirtir
 
     const fetchImages = async () => {
       try {
         const response = await unsplash.photos.getRandom({
-          count: posts.length
+          count: posts.length // Alınacak fotoğraf sayısı, post sayısına eşit
         });
 
         if (response.errors) {
@@ -76,130 +68,79 @@ const ProfilePage = () => {
       }
     };
 
-    fetchImages();
+    fetchImages(); // 'fetchImages' fonksiyonu çağrılır
   }, [posts.length]);
 
-  const handleSearch = (value: string) => {
-    const data = (postsData as Data).posts.map((post: Post) => post.content);
-    const results = data.filter((item: string) =>
-      item.toLowerCase().includes(value.toLowerCase())
-    );
-    setSearchResults(results);
-  };
-
   if (!isClient) {
-    return null;
+    return null; // Sayfa istemci tarafında render edilene kadar hiçbir şey döndürülmez
   }
 
   return (
-    <div style={{ padding: "15px 120px" }} key={isClient ? "client" : "server"}>
-      <div
-        style={{
-          display: "flex",
-          justifyContent: "space-between",
-          alignItems: "center"
-        }}>
-        <h1>Profile</h1>
-        <Image src={icon} alt='Icon' width={50} height={50} />
-      </div>
-      <hr />
-      <SearchBox onSearch={handleSearch} />
+    <Layout>
+      <div className='profile-container'>
+        <div className='profile-header'></div>
+        <hr />
+        <div className='profile-content'>
+          <div className='profile-post-input-container'>
+            <img
+              src={images[0] || "https://via.placeholder.com/50"}
+              alt='Profile'
+              className='profile-profile-image'
+            />
+          </div>
 
-      <div style={{ display: "flex", marginTop: "1rem" }}>
-        <img
-          src={images[0] || profileImages[0]}
-          alt='Profile'
-          style={{
-            borderRadius: "100%",
-            marginRight: "-4rem",
-            marginTop: "1rem"
-          }}
-          className='profile-image'
-        />
-        <div style={{ flex: 1, borderRight: "1px solid #ddd" }}>
-          <input
-            type='text'
-            placeholder="  What's happening?"
-            className='post-input'
-            style={{
-              width: "70%",
-              padding: "1rem",
-              marginBottom: "1rem",
-              backgroundColor: "white",
-              fontSize: "1.5rem",
-              borderRight: " 1px solid #ddd"
-            }}
-          />
-          <div className='actions'>
-            <div
-              style={{
-                display: "flex",
-                alignItems: "center",
-                marginLeft: "7rem"
-              }}>
-              <FontAwesomeIcon icon={faImage} className='action-icon' />
-              <FontAwesomeIcon icon={faGrin} className='action-icon' />
-              <FontAwesomeIcon icon={faPoll} className='action-icon' />
-              <FontAwesomeIcon icon={faLaughBeam} className='action-icon' />
-              <FontAwesomeIcon icon={faCalendarAlt} className='action-icon' />
-            </div>
-            <button
-              style={{
-                backgroundColor: "#ff8700",
-                color: "white",
-                padding: "0.5rem 1rem",
-                borderRadius: "10rem",
-                border: "none",
-                cursor: "pointer",
-                marginRight: "2rem"
-              }}>
-              Post
-            </button>
+          <div>
+            {filteredPosts.map((post: Post, index: number) => (
+              <div key={post.id} className='profile-post'>
+                <div className='profile-post-header'>
+                  <div className='profile-post-header-text'>
+                    <FontAwesomeIcon
+                      icon={faEllipsisH}
+                      className='profile-three-dots-icon'
+                    />
+                    <h3>{post.username}</h3>
+                    <span className='profile-username-info'>
+                      @{post.username} .5m
+                    </span>
+                  </div>
+                </div>
+                <p>{post.content}</p>
+                {images[index] ? (
+                  <img
+                    src={images[index]}
+                    alt='Post Image'
+                    className='profile-post-image'
+                    onError={(e) => {
+                      const target = e.target as HTMLImageElement;
+                      target.src = "https://via.placeholder.com/150"; // Fallback image
+                    }}
+                  />
+                ) : null}
+
+                <div className='profile-post-actions'>
+                  <FontAwesomeIcon
+                    icon={faComment}
+                    className='profile-action-icon'
+                  />
+                  <FontAwesomeIcon
+                    icon={faRetweet}
+                    className='profile-action-icon'
+                  />
+                  <FontAwesomeIcon
+                    icon={faHeart}
+                    className='profile-action-icon'
+                  />
+                  <FontAwesomeIcon
+                    icon={faUpload}
+                    className='profile-action-icon'
+                  />
+                </div>
+              </div>
+            ))}
           </div>
         </div>
       </div>
-
-      <div>
-        {posts.map((post: Post, index: number) => (
-          <div key={post.id} className='post'>
-            <div className='post-header'>
-              <img
-                src={images[index] || profileImages[0]}
-                alt={`${post.username} Profile`}
-                className='profile-image'
-              />
-              <div className='post-header-text'>
-                <h3>{post.username}</h3>
-                <span className='username-info'>@{post.username} .5m</span>
-              </div>
-            </div>
-            <p>{post.content}</p>
-            {images[index] ? (
-              <img
-                src={images[index]}
-                alt='Post Image'
-                className='post-image'
-                onError={(e) => {
-                  const target = e.target as HTMLImageElement;
-                  const fallbackIndex =
-                    index < fallbackImages.length ? index : 0;
-                  console.error("Image failed to load: ", target.src);
-                  target.onerror = null; // Prevents infinite loop if fallback image fails
-                  target.src = fallbackImages[fallbackIndex]; // Use fallback image URL
-                }}
-              />
-            ) : null}
-
-            <div className='post-actions'>
-              <FontAwesomeIcon icon={faComment} className='action-icon' />
-              <FontAwesomeIcon icon={faRetweet} className='action-icon' />
-              <FontAwesomeIcon icon={faHeart} className='action-icon' />
-              <FontAwesomeIcon icon={faUpload} className='action-icon' />
-            </div>
-          </div>
-        ))}
-      </div>
-    </div>
+    </Layout>
   );
 };
 

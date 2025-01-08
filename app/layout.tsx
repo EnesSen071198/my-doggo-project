@@ -1,19 +1,13 @@
 import Link from "next/link";
 import { FaHome, FaHashtag, FaBookmark, FaUser } from "react-icons/fa";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faEllipsisH } from "@fortawesome/free-solid-svg-icons"; // Adding the icon for three dots
-import "./globals.css"; // Eğer CSS dosyanız varsa
-import postsData from "../src/data/post_dataset.json";
-
-export const metadata = {
-  title: "My Doggo Project",
-  description: "Enes Sen Doggo Project"
-};
+import { faEllipsisH } from "@fortawesome/free-solid-svg-icons";
+import "./globals.css"; // CSS dosyanız varsa
 
 const Layout = ({ children }: { children: React.ReactNode }) => {
   const userProfile = {
-    username: "YourUsername", // Replace this with the actual username from your data
-    profileImage: "https://via.placeholder.com/50" // Replace this with the actual image URL from your data
+    username: "YourUsername", // Gerçek kullanıcı adı ile değiştirin
+    profileImage: "https://via.placeholder.com/50" // Gerçek profil resmi URL'si ile değiştirin
   };
 
   return (
@@ -82,7 +76,7 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
                   cursor: "pointer",
                   marginTop: "3rem",
                   position: "relative",
-                  backgroundColor: "transparent" // Background color removed
+                  backgroundColor: "transparent"
                 }}>
                 <img
                   src={userProfile.profileImage}
@@ -103,6 +97,8 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
               </button>
             </Link>
           </nav>
+
+          {/* Sayfa içeriği burada render edilecek */}
           <main style={{ flex: 1, padding: "20px" }}>{children}</main>
         </div>
       </body>

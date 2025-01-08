@@ -168,7 +168,8 @@ const HomePage = () => {
                   style={{
                     position: "absolute",
                     top: "0",
-                    right: "0"
+                    right: "0",
+                    cursor: "pointer"
                   }}
                 />
                 <h3>{post.username}</h3>

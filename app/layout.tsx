@@ -6,8 +6,8 @@ import "./globals.css"; // Eğer CSS dosyanız varsa
 import postsData from "../src/data/post_dataset.json";
 
 export const metadata = {
-  title: "My Next.js App",
-  description: "A sample Next.js app with categorized pages."
+  title: "My Doggo Project",
+  description: "Enes Sen Doggo Project"
 };
 
 const Layout = ({ children }: { children: React.ReactNode }) => {

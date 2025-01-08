@@ -13,6 +13,7 @@ import {
 import postsData from "../data/post_dataset.json"; // JSON dosyasından post verilerini alır
 import "../styles/ProfilePage.css"; // Profil sayfası için stil
 import Layout from "../../app/layout";
+
 // Post verisinin yapısını tanımlar
 interface Post {
   id: string;
@@ -32,13 +33,13 @@ interface Data {
 
 // Unsplash API'yi başlatır
 const unsplash = createApi({
-  accessKey: "EjbDtCDS0TUBnWllhd57GdVR7gI5wIQbGaGbRDhVSsc"
+  accessKey: "uO1U414qXKPrM8i3sGQDrrBHyDxaJH_NUd4xZmwRVjw"
 });
 
 const ProfilePage = () => {
   const [posts, setPosts] = useState<Post[]>((postsData as Data).posts);
   const [filteredPosts, setFilteredPosts] = useState<Post[]>(posts);
-  const [images, setImages] = useState<string[]>([]); // Postlar için resimleri tutan durum değişkeni
+  const [unsplashImages, setUnsplashImages] = useState<string[]>([]); // Unsplash'dan gelen resimler
   const [isClient, setIsClient] = useState(false); // İstemci tarafı olup olmadığını kontrol etmek için
 
   useEffect(() => {
@@ -61,7 +62,7 @@ const ProfilePage = () => {
                 (photo: { urls: { small: string } }) => photo.urls.small
               )
             : [response.response.urls.small];
-          setImages(urls);
+          setUnsplashImages(urls);
         }
       } catch (error) {
         console.error("Failed to fetch images from Unsplash", error);
@@ -75,6 +76,18 @@ const ProfilePage = () => {
     return null; // Sayfa istemci tarafında render edilene kadar hiçbir şey döndürülmez
   }
 
+  // Resmi kontrol etme ve fallback uygulama fonksiyonu
+  const getImage = (post: Post, index: number) => {
+    // Eğer post verisindeki images dizisi boş değilse
+    if (post.images.length > 0) {
+      const image = post.images[0]; // İlk resmi al
+      return image;
+    } else if (unsplashImages[index]) {
+      return unsplashImages[index]; // Eğer Unsplash'dan alınan resim varsa, onu göster
+    }
+    return "https://via.placeholder.com/150"; // Fallback resim
+  };
+
   return (
     <Layout>
       <div className='profile-container'>
@@ -83,7 +96,7 @@ const ProfilePage = () => {
         <div className='profile-content'>
           <div className='profile-post-input-container'>
             <img
-              src={images[0] || "https://via.placeholder.com/50"}
+              src={unsplashImages[0] || "https://via.placeholder.com/50"}
               alt='Profile'
               className='profile-profile-image'
             />
@@ -105,17 +118,17 @@ const ProfilePage = () => {
                   </div>
                 </div>
                 <p>{post.content}</p>
-                {images[index] ? (
-                  <img
-                    src={images[index]}
-                    alt='Post Image'
-                    className='profile-post-image'
-                    onError={(e) => {
-                      const target = e.target as HTMLImageElement;
-                      target.src = "https://via.placeholder.com/150"; // Fallback image
-                    }}
-                  />
-                ) : null}
+
+                {/* Veritabanındaki post resimleri ile Unsplash resimlerini render etme */}
+                <img
+                  src={unsplashImages[0] || "https://via.placeholder.com/50"}
+                  alt='Post Image'
+                  className='profile-post-image'
+                  onError={(e) => {
+                    const target = e.target as HTMLImageElement;
+                    target.src = "https://via.placeholder.com/150"; // Fallback image
+                  }}
+                />
 
                 <div className='profile-post-actions'>
                   <FontAwesomeIcon

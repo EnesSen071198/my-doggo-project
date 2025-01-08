@@ -98,7 +98,7 @@ input[type="text"] {
 .three-dots-icon {
   position: absolute; /* Konumu özgürleştirir */
   top: 0; /* Üstten sıfır piksel */
-  left: 47em; /* Soldan sıfır piksel */
+  left: 42em; /* Soldan sıfır piksel */
   color: gray;
   cursor: pointer; /* İkon üzerine gelindiğinde tıklanabilir olduğunu gösterir */
 }
@@ -134,8 +134,8 @@ input[type="text"] {
 @media (max-width: 480px) {
   .container {
     padding: 0px 0rem;
-    margin: 0rem -7rem;
-    width: auto;
+    margin: 0 -11em;
+    width: min-content;
   }
   .navbar {
     display: none;

@@ -68,3 +68,31 @@ hr {
   border: 0;
   border-top: 1px solid #ddd;
 }
+.new-post-button {
+  background-color: #e56d18;
+  color: white;
+  padding: 0.5rem 4rem;
+  border-radius: 10rem;
+  border: none;
+  cursor: pointer;
+  margin-top: 6rem;
+}
+
+.profile-button {
+  display: flex;
+  align-items: center;
+  padding: 0.5rem 1rem;
+  border-radius: 10rem;
+  border: none;
+  cursor: pointer;
+  margin-top: 3rem;
+  position: relative;
+  background-color: transparent;
+}
+.three-dots-icon {
+  position: absolute; /* Konumu özgürleştirir */
+  top: 0; /* Üstten sıfır piksel */
+  left: 42em; /* Soldan sıfır piksel */
+  color: gray;
+  cursor: pointer; /* İkon üzerine gelindiğinde tıklanabilir olduğunu gösterir */
+}

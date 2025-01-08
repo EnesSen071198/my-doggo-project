@@ -1,19 +1,55 @@
+"use client";
+
 import Link from "next/link";
+import { useEffect, useState } from "react";
 import { FaHome, FaHashtag, FaBookmark, FaUser } from "react-icons/fa";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEllipsisH } from "@fortawesome/free-solid-svg-icons";
-import "./globals.css"; // CSS dosyanız varsa
+import "./globals.css";
+import { createApi } from "unsplash-js"; // Unsplash API ile fotoğraf almak için kullanılır
+import postsData from "../src/data/post_dataset.json"; // JSON dosyasından post verilerini alır
+import { Post } from "./types"; // Post tipini burada kullanıyoruz
+
+// Unsplash API'yi başlatır
+const unsplash = createApi({
+  accessKey: "EjbDtCDS0TUBnWllhd57GdVR7gI5wIQbGaGbRDhVSsc"
+});
 
 const Layout = ({ children }: { children: React.ReactNode }) => {
-  const userProfile = {
-    username: "YourUsername", // Gerçek kullanıcı adı ile değiştirin
-    profileImage: "https://via.placeholder.com/50" // Gerçek profil resmi URL'si ile değiştirin
-  };
+  const [unsplashImages, setUnsplashImages] = useState<string[]>([]);
+  const [userProfile, setUserProfile] = useState({
+    username: "DefaultUser", // Varsayılan kullanıcı adı
+    profileImage: "https://via.placeholder.com/50" // Varsayılan profil resmi
+  });
+
+  useEffect(() => {
+    // İlk kullanıcıyı örnek olarak çekiyoruz (isteğe bağlı olarak başka bir yöntemle değiştirilebilir)
+    const userData = postsData.posts[1]; // `postsData` içindeki ilk postu çekiyoruz
+    if (userData) {
+      setUserProfile({
+        username: userData.username,
+        profileImage: "https://via.placeholder.com/50" // Profil resmini de buradan çekebilirsiniz
+      });
+    }
+
+    const fetchProfileImage = async () => {
+      try {
+        const response = await unsplash.photos.getRandom({ count: 1 });
+        if (response.response && Array.isArray(response.response)) {
+          setUnsplashImages(response.response.map((photo) => photo.urls.small));
+        }
+      } catch (error) {
+        console.error("Unsplash API error:", error);
+      }
+    };
+
+    fetchProfileImage();
+  }, []);
 
   return (
     <html lang='en'>
       <head>
-        <title>My Next.js App</title>
+        <title>Doggo Task App</title>
       </head>
       <body>
         <div className='container'>
@@ -52,53 +88,44 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
                 </Link>
               </li>
             </ul>
-            <button
-              style={{
-                backgroundColor: "#e56d18",
-                color: "white",
-                padding: "0.5rem 4rem",
-                borderRadius: "10rem",
-                border: "none",
-                cursor: "pointer",
-                marginTop: "6rem"
-              }}>
-              New Post
-            </button>
+            <button className='new-post-button'>New Post</button>
 
             <Link href='/ProfilePage' legacyBehavior>
-              <button
-                style={{
-                  display: "flex",
-                  alignItems: "center",
-                  padding: "0.5rem 1rem",
-                  borderRadius: "10rem",
-                  border: "none",
-                  cursor: "pointer",
-                  marginTop: "3rem",
-                  position: "relative",
-                  backgroundColor: "transparent"
-                }}>
+              <button className='profile-button'>
                 <img
-                  src={userProfile.profileImage}
+                  src={unsplashImages[0] || userProfile.profileImage}
                   alt='Profile'
-                  style={{ borderRadius: "50%", marginRight: "0.5rem" }}
+                  style={{
+                    borderRadius: "50%",
+                    marginRight: "0.5rem",
+                    width: "50px",
+                    height: "50px"
+                  }}
+                  onError={(e) => {
+                    const target = e.target as HTMLImageElement;
+                    target.src = "https://via.placeholder.com/50"; // Fallback profil resmi
+                  }}
                 />
-                {userProfile.username}
+                <div style={{ display: "flex", flexDirection: "column" }}>
+                  <div>{userProfile.username}</div>
+                  <div
+                    style={{
+                      color: "gray",
+                      fontSize: "0.8rem",
+                      justifyContent: "start"
+                    }}>
+                    @{userProfile.username}
+                  </div>{" "}
+                </div>
+
                 <FontAwesomeIcon
                   icon={faEllipsisH}
                   className='three-dots-icon'
-                  style={{
-                    position: "absolute",
-                    top: "0",
-                    right: "0",
-                    color: "#ddd"
-                  }}
                 />
               </button>
             </Link>
           </nav>
 
-          {/* Sayfa içeriği burada render edilecek */}
           <main style={{ flex: 1, padding: "20px" }}>{children}</main>
         </div>
       </body>

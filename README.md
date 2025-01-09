@@ -66,6 +66,6 @@ Proje Yapısı
 
     Proje Sahibi Bilgileri
         Enes Şen
-        enessen071198@gmail.com veya  infoenessen@gmail.com
+        enessen071198@gmail.com
         Linkedin : https://www.linkedin.com/in/enes--sen/
         Github : https://github.com/EnesSen071198

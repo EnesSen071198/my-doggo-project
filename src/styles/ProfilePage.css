@@ -1,98 +1,109 @@
 .profile-container {
   display: flex; /* Flexbox düzeni */
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  padding: 15px 120px;
-  margin-left: 5em;
-  max-width: 1200px;
-  margin: 0 auto;
+  flex-direction: column; /* Kolon yönünde */
+  align-items: center; /* Öğeleri ortala */
+  justify-content: center; /* İçeriği ortala */
+  padding: 15px 120px; /* İç dolgu */
+  margin-left: 5em; /* Sol marj */
+  max-width: 1200px; /* Maksimum genişlik */
+  margin: 0 auto; /* Otomatik marj */
 }
 
 .profile-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  width: 75%;
-  height: 15em;
-  background-color: #ff4f00;
-  margin-top: -15px;
+  display: flex; /* Flexbox düzeni */
+  justify-content: space-between; /* Öğeler arasında boşluk */
+  align-items: center; /* Öğeleri ortala */
+  width: 75%; /* Genişlik */
+  height: 15em; /* Yükseklik */
+  background-color: #ff4f00; /* Arka plan rengi */
+  margin-top: -15px; /* Üst marj */
 }
 .profile-content {
-  margin-top: -7em;
+  margin-top: -7em; /* Üst marj */
 }
 .profile-post-input-container {
-  display: flex;
-  margin-top: 1rem;
-  width: 70%;
+  display: flex; /* Flexbox düzeni */
+  margin-top: 1rem; /* Üst marj */
+  width: 70%; /* Genişlik */
   align-items: center; /* Profil resmini içeriğin hizasında tutar */
 }
 
 .profile-profile-image {
-  width: 100px;
-  height: 100px;
-  border-radius: 50%;
-  margin-right: 1rem;
+  width: 100px; /* Genişlik */
+  height: 100px; /* Yükseklik */
+  border-radius: 50%; /* Yuvarlak köşeler */
+  margin-right: 1rem; /* Sağ marj */
 }
 
 .profile-post {
-  border-bottom: 1px solid #ddd;
-  border-right: 1px solid #ddd;
-  padding: 1rem;
-  margin-bottom: 1rem;
-  border-radius: 5px;
-  width: 100%;
-  max-width: 700px;
+  border-bottom: 1px solid #ddd; /* Alt kenarlık */
+  border-right: 1px solid #ddd; /* Sağ kenarlık */
+  padding: 1rem; /* İç dolgu */
+  margin-bottom: 1rem; /* Alt marj */
+  border-radius: 5px; /* Yuvarlak köşeler */
+  width: 100%; /* Genişlik */
+  max-width: 700px; /* Maksimum genişlik */
   position: relative; /* İçeriği konumlandırmak için relatif pozisyon */
 }
 
 .profile-post-header {
-  display: block;
-  align-items: center;
-  margin-bottom: 0.5rem;
+  display: block; /* Blok düzeni */
+  align-items: center; /* Öğeleri ortala */
+  margin-bottom: 0.5rem; /* Alt marj */
 }
 
 .profile-post-header-text {
-  display: block;
+  display: block; /* Blok düzeni */
   align-items: center; /* Profil resmini ve metni aynı hizada tutar */
-  position: relative;
+  position: relative; /* Relatif pozisyon */
 }
 
 .profile-three-dots-icon {
-  position: absolute;
+  position: absolute; /* Mutlak pozisyon */
   top: 0; /* Üstten sıfır piksel */
-  left: 35em;
-  color: gray;
-  cursor: pointer;
+  left: 35em; /* Soldan 35em */
+  color: gray; /* İkon rengi */
+  cursor: pointer; /* İşaretçi imleç */
 }
 
 .profile-username-info {
-  color: gray;
-  margin-left: 0.5rem;
-  font-size: 0.9rem;
+  color: gray; /* Yazı rengi */
+  margin-left: 0.5rem; /* Sol marj */
+  font-size: 0.9rem; /* Yazı boyutu */
 }
 
 .profile-post-image {
-  width: 100%;
-  height: 400px;
-  margin: 0.5rem 0;
-  border-radius: 25px;
-  object-fit: cover;
-  background-position: center;
-  background-size: cover;
+  width: 100%; /* Genişlik */
+  height: 400px; /* Yükseklik */
+  margin: 0.5rem 0; /* Üst ve alt marj */
+  border-radius: 25px; /* Yuvarlak köşeler */
+  object-fit: cover; /* İçeriği kapsayıcı olarak yerleştir */
+  background-position: center; /* Arka plan konumu ortala */
+  background-size: cover; /* Arka plan boyutunu kapsayıcı yap */
 }
 
 .profile-post-actions {
-  display: flex;
-  justify-content: space-around;
-  margin-top: 1rem;
+  display: flex; /* Flexbox düzeni */
+  justify-content: space-around; /* Öğeler arasında boşluk */
+  margin-top: 1rem; /* Üst marj */
 }
 
 .profile-action-icon {
-  font-size: 1.5rem;
-  cursor: pointer;
-  color: #333;
-  margin-right: 2rem;
-  padding-right: 2rem;
-  color: #e56d18;
+  font-size: 1.5rem; /* Yazı boyutu */
+  cursor: pointer; /* İşaretçi imleç */
+  color: #333; /* Yazı rengi */
+  margin-right: 2rem; /* Sağ marj */
+  padding-right: 2rem; /* Sağ iç dolgu */
+  color: #ddd; /* Yazı rengi */
+}
+
+@media (max-width: 480px) {
+  .profile-container {
+    padding: 0px 0rem; /* İç dolgu */
+    margin: 0 -11em; /* Marj */
+    width: fit-content; /* İçeriğe sığacak genişlik */
+  }
+  .navbar {
+    display: none; /* Navbar'ı gizle */
+  }
 }

@@ -13,7 +13,6 @@ import {
 import postsData from "../data/post_dataset.json"; // JSON dosyasından post verilerini alır
 import "../styles/ProfilePage.css"; // Profil sayfası için stil
 import Layout from "../../app/layout";
-
 // Post verisinin yapısını tanımlar
 interface Post {
   id: string;
@@ -134,18 +133,22 @@ const ProfilePage = () => {
                   <FontAwesomeIcon
                     icon={faComment}
                     className='profile-action-icon'
+                    style={{ color: "#ff8700" }}
                   />
                   <FontAwesomeIcon
                     icon={faRetweet}
                     className='profile-action-icon'
+                    style={{ color: "#ff8700" }}
                   />
                   <FontAwesomeIcon
                     icon={faHeart}
                     className='profile-action-icon'
+                    style={{ color: "#ff8700" }}
                   />
                   <FontAwesomeIcon
                     icon={faUpload}
                     className='profile-action-icon'
+                    style={{ color: "#ff8700" }}
                   />
                 </div>
               </div>

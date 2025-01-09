@@ -22,22 +22,23 @@ import postsData from "../data/post_dataset.json"; // JSON dosyasından post ver
 import icon from "../assets/icon.png"; // Uygulama ikonu
 import "../../app/globals.css"; // Global CSS dosyasını içe aktarır
 import "../styles/HomePage.css";
+
 // Post verisinin yapısını tanımlar
 interface Post {
-  id: string;
-  username: string;
-  content: string;
-  timestamp: string;
-  likes: number;
-  reposts: number;
-  tags: string[];
-  images: string[];
-  comments: any[];
+  id: string; // Post ID'si
+  username: string; // Kullanıcı adı
+  content: string; // Post içeriği
+  timestamp: string; // Zaman damgası
+  likes: number; // Beğeni sayısı
+  reposts: number; // Yeniden paylaşım sayısı
+  tags: string[]; // Post etiketleri
+  images: string[]; // Post resimleri
+  comments: any[]; // Post yorumları
 }
 
 // Veritabanındaki postları tutan bir veri yapısı tanımlar
 interface Data {
-  posts: Post[];
+  posts: Post[]; // Postlar listesi
 }
 
 // Düşük çözünürlüklü bir placeholder resmini belirler
@@ -47,13 +48,13 @@ const profileImages = ["https://via.placeholder.com/50"];
 
 // Unsplash API'yi başlatır
 const unsplash = createApi({
-  accessKey: "EjbDtCDS0TUBnWllhd57GdVR7gI5wIQbGaGbRDhVSsc"
+  accessKey: "uO1U414qXKPrM8i3sGQDrrBHyDxaJH_NUd4xZmwRVjw" // Unsplash API anahtarı
 });
 
 const HomePage = () => {
   // Postları ve filtrelenmiş postları tutan durum değişkenlerini oluşturur
   const [posts, setPosts] = useState<Post[]>((postsData as Data).posts);
-  const [filteredPosts, setFilteredPosts] = useState<Post[]>(posts);
+  const [filteredPosts, setFilteredPosts] = useState<Post[]>(posts); // Filtrelenmiş postlar
   const [images, setImages] = useState<string[]>([]); // Postlar için resimleri tutan durum değişkeni
   const [isClient, setIsClient] = useState(false); // İstemci tarafı olup olmadığını kontrol etmek için
 
@@ -120,11 +121,31 @@ const HomePage = () => {
           <div className='actions'>
             <div className='action-icons'>
               {/* Aşağıdaki ikonlar post içerisine eklenebilecek aksiyonları temsil eder */}
-              <FontAwesomeIcon icon={faImage} className='action-icon' />
-              <FontAwesomeIcon icon={faGrin} className='action-icon' />
-              <FontAwesomeIcon icon={faPoll} className='action-icon' />
-              <FontAwesomeIcon icon={faLaughBeam} className='action-icon' />
-              <FontAwesomeIcon icon={faCalendarAlt} className='action-icon' />
+              <FontAwesomeIcon
+                icon={faImage}
+                className='action-icon'
+                style={{ color: "#ff8700" }}
+              />
+              <FontAwesomeIcon
+                icon={faGrin}
+                className='action-icon'
+                style={{ color: "#ff8700" }}
+              />
+              <FontAwesomeIcon
+                icon={faPoll}
+                className='action-icon'
+                style={{ color: "#ff8700" }}
+              />
+              <FontAwesomeIcon
+                icon={faLaughBeam}
+                className='action-icon'
+                style={{ color: "#ff8700" }}
+              />
+              <FontAwesomeIcon
+                icon={faCalendarAlt}
+                className='action-icon'
+                style={{ color: "#ff8700" }}
+              />
             </div>
             <button className='post-button'>Post</button> {/* Paylaş butonu */}
           </div>

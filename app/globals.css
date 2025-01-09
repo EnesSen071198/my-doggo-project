@@ -1,98 +1,114 @@
+/* Tailwind CSS'in temel, bileşenler ve yardımcı sınıflarını ekler */
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
+/* Renk değişkenlerini tanımlar (Açık ve Koyu tema için) */
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --background: #ffffff; /* Arka plan rengi */
+  --foreground: #171717; /* Yazı rengi */
 }
 
+/* Kullanıcının sistem teması koyu ise renkleri değiştirir */
 @media (prefers-color-scheme: dark) {
   :root {
-    --background: #ffffff;
-    --foreground: #000000;
+    --background: #ffffff; /* Koyu tema için arka plan rengi */
+    --foreground: #000000; /* Koyu tema için yazı rengi */
   }
 }
 
+/* Gövde (body) için genel stil tanımları */
 body {
-  color: var(--foreground);
-  background: var(--background);
-  font-family: Arial, Helvetica, sans-serif;
+  color: var(--foreground); /* Yazı rengi */
+  background: var(--background); /* Arka plan rengi */
+  font-family: Arial, Helvetica, sans-serif; /* Yazı tipi */
 }
 
+/* Genel düzen ve kapsayıcı sınıf */
 .container {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 0 1rem;
-  display: flex;
-  justify-content: center;
-  align-items: flex-start;
-  min-height: 100vh;
+  max-width: 1200px; /* Maksimum genişlik */
+  margin: 0 auto; /* Ortalar */
+  padding: 0 1rem; /* İç boşluk */
+  display: flex; /* Esnek kutu düzeni */
+  justify-content: center; /* Yatayda ortalar */
+  align-items: flex-start; /* Dikeyde başlangıca hizalar */
+  min-height: 100vh; /* Minimum ekran yüksekliği */
 }
 
+/* Dikey sabit konumda duran gezinti çubuğu */
 .navbar {
-  position: fixed;
-  top: 50%;
-  left: 130px;
-  transform: translateY(-50%);
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: flex-start;
-  padding: 7rem;
-  margin: auto 5rem;
-  font-size: 20px;
-  background-color: var(--background);
+  position: fixed; /* Sabit konum */
+  top: 50%; /* Sayfanın ortasına hizala */
+  left: 130px; /* Sol kenardan boşluk */
+  transform: translateY(-50%); /* Dikey olarak tam ortala */
+  display: flex; /* Esnek kutu düzeni */
+  flex-direction: column; /* Elemanları dikeyde hizala */
+  justify-content: center; /* Yatayda ortala */
+  align-items: flex-start; /* Elemanları başlangıca hizala */
+  padding: 7rem; /* İç boşluk */
+  margin: auto 5rem; /* Dış boşluk */
+  font-size: 20px; /* Yazı boyutu */
+  background-color: var(--background); /* Arka plan rengi */
 }
 
+/* Listeye ait temel ayarlar */
 .ul-list {
-  list-style: none;
-  padding: 0;
+  list-style: none; /* Liste işaretlerini kaldırır */
+  padding: 0; /* İç boşluk sıfırla */
 }
 
+/* Liste öğelerinin arası için boşluk tanımı */
 .li-list {
-  padding: 1.5rem 0;
+  padding: 1.5rem 0; /* Üst ve alt boşluk */
 }
 
+/* Bağlantılar için düzen */
 .link {
-  display: flex;
-  align-items: center;
+  display: flex; /* Esnek kutu düzeni */
+  align-items: center; /* Dikeyde ortalar */
 }
 
+/* İkonlar için boşluk tanımı */
 .icon {
-  margin-right: 8px;
+  margin-right: 8px; /* Sağ tarafa boşluk ekler */
 }
 
+/* Ayrım çizgisi için stil */
 hr {
-  margin: 1rem 0;
-  border: 0;
-  border-top: 1px solid #ddd;
-}
-.new-post-button {
-  background-color: #e56d18;
-  color: white;
-  padding: 0.5rem 4rem;
-  border-radius: 10rem;
-  border: none;
-  cursor: pointer;
-  margin-top: 6rem;
+  margin: 1rem 0; /* Üst ve alt boşluk */
+  border: 0; /* Çerçeveyi kaldırır */
+  border-top: 1px solid #ddd; /* Üst çizgi ekler */
 }
 
-.profile-button {
-  display: flex;
-  align-items: center;
-  padding: 0.5rem 1rem;
-  border-radius: 10rem;
-  border: none;
-  cursor: pointer;
-  margin-top: 3rem;
-  position: relative;
-  background-color: transparent;
+/* Yeni gönderi butonu için stil */
+.new-post-button {
+  background-color: #e56d18; /* Arka plan rengi */
+  color: white; /* Yazı rengi */
+  padding: 0.5rem 4rem; /* İç boşluk */
+  border-radius: 10rem; /* Yuvarlak kenar */
+  border: none; /* Çerçeve yok */
+  cursor: pointer; /* İmleci işaretçiye dönüştür */
+  margin-top: 6rem; /* Üstten boşluk */
 }
+
+/* Profil butonu için stil */
+.profile-button {
+  display: flex; /* Esnek kutu düzeni */
+  align-items: center; /* Dikeyde ortala */
+  padding: 0.5rem 1rem; /* İç boşluk */
+  border-radius: 10rem; /* Yuvarlak kenar */
+  border: none; /* Çerçeve yok */
+  cursor: pointer; /* İmleci işaretçiye dönüştür */
+  margin-top: 3rem; /* Üstten boşluk */
+  position: relative; /* Konumlandırma için referans */
+  background-color: transparent; /* Şeffaf arka plan */
+}
+
+/* Üç nokta ikonunun konumu ve görünümü */
 .three-dots-icon {
-  position: absolute; /* Konumu özgürleştirir */
-  top: 0; /* Üstten sıfır piksel */
-  left: 42em; /* Soldan sıfır piksel */
-  color: gray;
-  cursor: pointer; /* İkon üzerine gelindiğinde tıklanabilir olduğunu gösterir */
+  position: absolute; /* İkonun pozisyonunu sabitler */
+  top: 0; /* Üst kenardan başlangıç noktası */
+  left: 42em; /* Sol kenardan mesafe */
+  color: gray; /* İkon rengi */
+  cursor: pointer; /* Tıklanabilir imleç */
 }

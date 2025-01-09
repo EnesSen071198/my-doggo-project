@@ -1,36 +1,71 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+Doggo Görevi
 
-## Getting Started
+Bu projede Next.js kullanarak sıfırdan bir web uygulaması geliştirdik. Projede kullanılan dosya ve klasörlerin düzenlenmesi ile ilgili ayrıntılı bilgiler aşağıda yer almaktadır.
 
-First, run the development server:
+---
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+Proje Yapısı
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+    src klasörü içerisinde:
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+        assets: Projede kullanılan ikonlar ve medya dosyaları.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+                Verilen projede kullanılan ikon burada bulunmaktadır. FontAwesome'da "sparkles" ikonu Pro sürümde olduğu için, Canva ile düzenlemeler yapılıp icon.png formatında yüklenmiştir.
 
-## Learn More
+        components: Projede kullanılan bileşenler.
 
-To learn more about Next.js, take a look at the following resources:
+                Arama çubuğu bileşeni için searchbox.tsx oluşturulmuştur.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+        data: JSON formatında verilerin ve API bileşenlerinin bulunduğu klasör.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+                post_dataset.json ve unsplash.js bileşenleri burada yer alır. Eğer JSON formatındaki resim verileri hatalıysa, Unsplash API kullanılarak yeni resimler çekilir.
 
-## Deploy on Vercel
+        pages: Proje içerisindeki sayfa bileşenleri.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+                Kategori bileşenleri: BookmarkPage, ExplorePage, HomePage, ProfilePage.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+        styles: Projede kullanılan CSS dosyaları.
+
+                İlgili bileşenlere uygun CSS dosyaları burada yer alır.
+
+---
+
+    Ana Dizinde Bulunan Dosyalar
+
+        app klasöründe:
+
+                page.tsx: Ana sayfa bileşeninin import edildiği dosya.
+
+                types klasörü: TSX formatının verilerinin tiplerinin belirlendiği dosyalar.
+
+                layout.tsx: Görevde verilen sitenin iskeletinin oluşturulduğu dosya. Aynı dizinde bulunan global.css ile görünüm tamamlanmıştır.
+
+---
+
+    Kullanılan Kütüphaneler
+
+        Next.js: Projeyi oluşturmak için : npx create-next-app@latest my-doggo-project  -> cd my-doggo-project -> npm run dev
+
+        React ve React DOM: React bileşenleri için : npm install react react-dom
+
+        FontAwesome: İkonlar için kullanılmıştır : npm install @fortawesome/react-fontawesome @fortawesome/free-solid-svg-icons unsplash-js
+
+        Unsplash JS: Unsplash API kullanımı için : npm install unsplash-js
+
+---
+
+    Ek Bilgiler
+        Projenin son hali ve nasıl göründüğünü anlatmak için çekilen video ve ekran görüntüleri, projenin ana dizininde oluşturulan "doggo-proje-done" dosyasına eklenmiştir.
+
+---
+
+    Açıklamalar ve Yorumlar
+        Proje sonunda tüm TSX ve CSS dosyalarına yapay zeka kullanarak yorum satırları eklenmiştir. Bu sayede neyin ne olduğu ve nereden geldiği net bir şekilde anlaşılması amaçlanmıştır.
+
+---
+
+    Proje Sahibi Bilgileri
+        Enes Şen
+        enessen071198@gmail.com veya  infoenessen@gmail.com
+        Linkedin : https://www.linkedin.com/in/enes--sen/
+        Github : https://github.com/EnesSen071198

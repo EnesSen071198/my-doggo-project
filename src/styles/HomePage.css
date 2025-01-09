@@ -1,176 +1,175 @@
 .homepage-container {
-  padding: 15px 120px;
-  margin-left: 5em;
+  padding: 15px 120px; /* Container padding */
+  margin-left: 5em; /* Sol marj */
 }
 
 .homepage-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+  display: flex; /* Başlığı flexbox olarak görüntüle */
+  justify-content: space-between; /* Öğeler arasına boşluk koy */
+  align-items: center; /* Öğeleri ortala */
 }
 input[type="text"] {
-  width: 80%;
-  margin: 0.3rem 6rem;
-  padding: 1rem;
-  border: 1px solid #fffefe;
-  background-color: #ddd;
-  border-radius: 10rem;
+  width: 80%; /* Metin girişi genişliği */
+  margin: 0.3rem 6rem; /* Metin girişi marjı */
+  padding: 1rem; /* Metin girişi dolgu */
+  border: 1px solid #fffefe; /* Metin girişi kenarlığı */
+  background-color: #ddd; /* Metin girişi arka plan rengi */
+  border-radius: 10rem; /* Metin girişinin köşeleri yuvarlatılmış */
 }
 .post-input-container {
-  display: flex;
-  margin-top: 1rem;
+  display: flex; /* Container'ı flexbox olarak görüntüle */
+  margin-top: 1rem; /* Üst marj */
 }
 
 .post-input-wrapper {
-  flex: 1;
-  border-right: 1px solid #ddd;
-  margin-left: -90px;
+  flex: 1; /* Flex özelliği */
+  border-right: 1px solid #ddd; /* Sağ kenarlık */
+  margin-left: -90px; /* Sol marj */
 }
 
 .post-input {
-  width: 70%;
-  padding: 1rem;
-  margin-bottom: 1rem;
-  background-color: white;
-  font-size: 1.5rem;
-  border-right: 1px solid #ddd;
+  width: 70%; /* Post girişi genişliği */
+  padding: 1rem; /* Post girişi dolgu */
+  margin-bottom: 1rem; /* Alt marj */
+  background-color: white; /* Post girişi arka plan rengi */
+  font-size: 1.5rem; /* Post girişi yazı boyutu */
+  border-right: 1px solid #ddd; /* Sağ kenarlık */
 }
 .actions {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  margin-top: 0;
-  margin-bottom: 2rem;
+  display: flex; /* Aksiyonları flexbox olarak görüntüle */
+  align-items: center; /* Öğeleri ortala */
+  justify-content: space-between; /* Öğeler arasına boşluk koy */
+  margin-top: 0; /* Üst marj */
+  margin-bottom: 2rem; /* Alt marj */
 }
 .action-icons {
-  display: flex;
-  align-items: center;
-  margin-left: 7rem;
+  display: flex; /* İkonları flexbox olarak görüntüle */
+  align-items: center; /* Öğeleri ortala */
+  margin-left: 7rem; /* Sol marj */
 }
 
 .post-button {
-  background-color: #ff8700;
-  color: white;
-  padding: 0.5rem 1rem;
-  border-radius: 10rem;
-  border: none;
-  cursor: pointer;
-  margin-right: 2rem;
+  background-color: #ff8700; /* Düğmenin arka plan rengi */
+  color: white; /* Yazı rengi */
+  padding: 0.5rem 1rem; /* Dolgu */
+  border-radius: 10rem; /* Köşeleri yuvarlatılmış */
+  border: none; /* Kenarlık yok */
+  cursor: pointer; /* Üzerine gelindiğinde pointer */
+  margin-right: 2rem; /* Sağ marj */
 }
 
 .post {
-  border-top: 1px solid #ddd;
-  border-bottom: 1px solid #ddd;
-  border-right: 1px solid #ddd;
-  padding: 1rem;
-  margin-bottom: 1rem;
-  border-radius: 5px;
+  border-top: 1px solid #ddd; /* Üst kenarlık */
+  border-right: 1px solid #ddd; /* Sağ kenarlık */
+  padding: 1rem; /* Dolgu */
+  margin-bottom: 1rem; /* Alt marj */
+  border-radius: 5px; /* Köşeleri yuvarlatılmış */
 }
 .post-image {
-  width: 100%; /* Ensures the image takes up the full width of its container */
-  height: 400px; /* Fixes the height of the image to 400 pixels */
-  margin: 0.5rem 0; /* Adds a margin of 0.5 rem above and below the image */
-  border-radius: 25px; /* Rounds the corners of the image with a 5-pixel radius */
-  object-fit: cover; /* Ensures the image covers the container without distortion */
-  background-position: center; /* Centers the background image */
-  background-size: cover; /* Scales the background image to cover the container while maintaining its aspect ratio */
+  width: 100%; /* Görüntü kapsayıcının tam genişliğini kaplar */
+  height: 400px; /* Görüntü yüksekliğini 400 piksel olarak sabitler */
+  margin: 0.5rem 0; /* Görüntünün üstünde ve altında 0.5 rem marj ekler */
+  border-radius: 25px; /* Görüntünün köşelerini 25 piksel yuvarlatır */
+  object-fit: cover; /* Görüntünün kapsayıcıyı bozulmadan kaplamasını sağlar */
+  background-position: center; /* Arka plan görüntüsünü ortalar */
+  background-size: cover; /* Arka plan görüntüsünü oranlarını koruyarak kapsayıcıya sığdırır */
 }
 
 .post-header {
-  display: flex;
-  align-items: center;
-  margin-bottom: 0.5rem;
+  display: flex; /* Başlığı flexbox olarak görüntüle */
+  align-items: center; /* Öğeleri ortala */
+  margin-bottom: 0.5rem; /* Alt marj */
 }
 
 .profile-image {
-  width: 50px;
-  height: 50px;
-  border-radius: 50%;
-  margin-right: 1rem;
+  width: 50px; /* Profil görüntüsü genişliği */
+  height: 50px; /* Profil görüntüsü yüksekliği */
+  border-radius: 50%; /* Yuvarlak görüntü */
+  margin-right: 1rem; /* Sağ marj */
 }
 
 .post-header-text {
   position: relative; /* Parent container'ı pozisyonlu hale getiriyoruz */
-  display: flex;
-  align-items: center;
+  display: flex; /* Metni flexbox olarak görüntüle */
+  align-items: center; /* Öğeleri ortala */
 }
 
 .three-dots-icon {
   position: absolute; /* Konumu özgürleştirir */
   top: 0; /* Üstten sıfır piksel */
   left: 42em; /* Soldan sıfır piksel */
-  color: gray;
+  color: gray; /* İkon rengi */
   cursor: pointer; /* İkon üzerine gelindiğinde tıklanabilir olduğunu gösterir */
 }
 
 .username-info {
-  color: gray;
-  margin-left: 0.5rem; /* Adjust the space as needed */
-  font-size: 0.9rem; /* Adjust the font size as needed */
+  color: gray; /* Yazı rengi */
+  margin-left: 0.5rem; /* Boşluğu gerektiği gibi ayarlar */
+  font-size: 0.9rem; /* Yazı boyutunu gerektiği gibi ayarlar */
 }
 
 .post-actions {
-  display: flex;
-  justify-content: space-around;
-  margin-top: 1rem;
+  display: flex; /* Aksiyonları flexbox olarak görüntüle */
+  justify-content: space-around; /* Öğeler arasına boşluk koy */
+  margin-top: 1rem; /* Üst marj */
 }
 
 .action-icon {
-  font-size: 1.5rem;
-  cursor: pointer;
-  color: #333;
-  margin-right: 2rem;
-  padding-right: 2rem;
-  right: 2rem;
-  color: #e56d18;
+  font-size: 1.5rem; /* Yazı boyutu */
+  cursor: pointer; /* Üzerine gelindiğinde pointer */
+  color: #333; /* Yazı rengi */
+  margin-right: 2rem; /* Sağ marj */
+  padding-right: 2rem; /* Sağ dolgu */
+  right: 2rem; /* Pozisyonlandırma */
+  color: #ddd; /* Yazı rengi */
 }
 
 .action-icon:hover {
-  color: #007bff;
+  color: #007bff; /* Üzerine gelindiğinde yazı rengi */
 }
 
 /*-------------------------------------------------*/
 
 @media (max-width: 480px) {
   .container {
-    padding: 0px 0rem;
-    margin: 0 -11em;
-    width: min-content;
+    padding: 0px 0rem; /* Dolgu */
+    margin: 0 -11em; /* Marj */
+    width: f-content; /* Genişlik */
   }
   .navbar {
-    display: none;
+    display: none; /* Navbar'ı gizle */
   }
   input[type="text"] {
-    width: 100%;
-    margin: 0.2rem 45px;
+    width: 100%; /* Metin girişi genişliği */
+    margin: 0.2rem 45px; /* Marj */
   }
   .actions {
-    margin-left: -88px;
+    margin-left: -88px; /* Sol marj */
   }
   .post {
-    padding: 0.5rem;
+    padding: 0.5rem; /* Dolgu */
   }
 
   .profile-image {
-    width: 40px;
-    height: 40px;
-    z-index: 1;
+    width: 40px; /* Profil görüntüsü genişliği */
+    height: 40px; /* Profil görüntüsü yüksekliği */
+    z-index: 1; /* Z-index */
   }
 
   .username-info {
-    font-size: 12px;
+    font-size: 12px; /* Yazı boyutu */
   }
 
   .post-image {
-    height: auto;
-    max-height: 200px;
+    height: auto; /* Yükseklik */
+    max-height: 200px; /* Maksimum yükseklik */
   }
 
   .action-icon {
-    font-size: 0.9rem;
-    margin-right: 0.5rem;
+    font-size: 0.9rem; /* Yazı boyutu */
+    margin-right: 0.5rem; /* Sağ marj */
   }
   .search-icon {
-    left: 60px;
+    left: 60px; /* Pozisyonlandırma */
   }
 }

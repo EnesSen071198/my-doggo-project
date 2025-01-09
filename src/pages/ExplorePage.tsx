@@ -48,7 +48,7 @@ const profileImages = ["https://via.placeholder.com/50"];
 
 // Unsplash API'yi başlatır
 const unsplash = createApi({
-  accessKey: "EjbDtCDS0TUBnWllhd57GdVR7gI5wIQbGaGbRDhVSsc"
+  accessKey: "uO1U414qXKPrM8i3sGQDrrBHyDxaJH_NUd4xZmwRVjw"
 });
 
 const ExplorePage = () => {
@@ -99,7 +99,7 @@ const ExplorePage = () => {
     <Layout>
       <div className='homepage-container'>
         <div className='homepage-header'>
-          <h1>ExplorePage</h1> {/* Sayfa başlığı */}
+          <h1>Explore</h1> {/* Sayfa başlığı */}
           <Image src={icon} alt='Icon' width={50} height={50} />{" "}
           {/* Uygulama ikonu */}
         </div>
@@ -117,15 +117,36 @@ const ExplorePage = () => {
               type='text'
               placeholder="  What's happening?" // Post yazma alanı
               className='post-input'
+              style={{ backgroundColor: "white" }}
             />
             <div className='actions'>
               <div className='action-icons'>
                 {/* Aşağıdaki ikonlar post içerisine eklenebilecek aksiyonları temsil eder */}
-                <FontAwesomeIcon icon={faImage} className='action-icon' />
-                <FontAwesomeIcon icon={faGrin} className='action-icon' />
-                <FontAwesomeIcon icon={faPoll} className='action-icon' />
-                <FontAwesomeIcon icon={faLaughBeam} className='action-icon' />
-                <FontAwesomeIcon icon={faCalendarAlt} className='action-icon' />
+                <FontAwesomeIcon
+                  icon={faImage}
+                  className='action-icon'
+                  style={{ color: "#ff8700" }}
+                />
+                <FontAwesomeIcon
+                  icon={faGrin}
+                  className='action-icon'
+                  style={{ color: "#ff8700" }}
+                />
+                <FontAwesomeIcon
+                  icon={faPoll}
+                  className='action-icon'
+                  style={{ color: "#ff8700" }}
+                />
+                <FontAwesomeIcon
+                  icon={faLaughBeam}
+                  className='action-icon'
+                  style={{ color: "#ff8700" }}
+                />
+                <FontAwesomeIcon
+                  icon={faCalendarAlt}
+                  className='action-icon'
+                  style={{ color: "#ff8700" }}
+                />
               </div>
               <button className='post-button'>Post</button>{" "}
               {/* Paylaş butonu */}

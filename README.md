@@ -1,4 +1,3 @@
-Doggo Görevi
 
 Bu projede Next.js kullanarak sıfırdan bir web uygulaması geliştirdik. Projede kullanılan dosya ve klasörlerin düzenlenmesi ile ilgili ayrıntılı bilgiler aşağıda yer almaktadır.
 
